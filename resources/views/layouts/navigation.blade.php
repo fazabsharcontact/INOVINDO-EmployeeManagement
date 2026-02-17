@@ -92,7 +92,7 @@
                         {{-- garis --}}
                         <div class="h-[1px] bg-slate-300/60 my-1 mx-3"></div>
 
-                        <!-- Meeting -->
+                        {{-- <!-- Meeting -->
                         <x-nav-link :href="route('admin.meeting.index')" 
                             :active="request()->routeIs('admin.meeting.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -101,9 +101,9 @@
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7H3v12a2 2 0 002 2z" />
                             </svg>
                             <span>Meeting</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
-                        <!-- Tugas -->
+                        {{-- <!-- Tugas -->
                         <x-nav-link :href="route('admin.tugas.index')" 
                             :active="request()->routeIs('admin.tugas.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -112,7 +112,7 @@
                                     d="M5 13l4 4L19 7" />
                             </svg>
                             <span>Tugas</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
                         <!-- Pengumuman -->
                         <x-nav-link :href="route('admin.pengumuman.index')" 
@@ -136,7 +136,7 @@
                             <span>Employee</span>
                         </x-nav-link>
 
-                        <!-- Tim & Divisi -->
+                        {{-- <!-- Tim & Divisi -->
                         <x-nav-link :href="route('admin.tim-divisi.index')" 
                             :active="request()->routeIs('admin.tim-divisi.*')" class="!justify-start gap-3 border-t pt-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -145,9 +145,9 @@
                                     d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H4v-2a4 4 0 015-3.87m8-6.63a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                             <span>Tim & Divisi</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
-                        <!-- Manajemen Cuti -->
+                        {{-- <!-- Manajemen Cuti -->
                         <x-nav-link :href="route('admin.cuti.index')" 
                             :active="request()->routeIs('admin.cuti.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -156,7 +156,7 @@
                                     d="M4 4h16v16H4z" />
                             </svg>
                             <span>Manajemen Cuti</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
                         <!-- Salary -->
                         <x-nav-link :href="route('admin.gaji.index')" 
@@ -169,7 +169,7 @@
                             <span>Salary</span>
                         </x-nav-link>
 
-                        <!-- Tunjangan & Potongan -->
+                        {{-- <!-- Tunjangan & Potongan -->
                         <x-nav-link :href="route('admin.tunjangan-potongan.index')" 
                             :active="request()->routeIs('admin.tunjangan-potongan.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -178,9 +178,9 @@
                                     d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-10v12"/>
                             </svg>
                             <span>Tunjangan & Potongan</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
-                        <!-- Position -->
+                        {{-- <!-- Position -->
                         <x-nav-link :href="route('admin.jabatan.index')" 
                             :active="request()->routeIs('admin.jabatan.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -189,13 +189,13 @@
                                     d="M17 9V7a5 5 0 00-10 0v2M5 9h14v12H5z" />
                             </svg>
                             <span>Position</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
                         {{-- garis --}}
                         <div class="h-[1px] bg-slate-300/60 my-1 mx-3"></div>
 
 
-                        <!-- Tugas Pengumpulan -->
+                        {{-- <!-- Tugas Pengumpulan -->
                         <x-nav-link :href="route('admin.tugas_pengumpulan.index')" 
                             :active="request()->routeIs('admin.tugas_pengumpulan.*')" class="!justify-start gap-3">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
@@ -204,7 +204,7 @@
                                     d="M12 4v16m8-8H4" />
                             </svg>
                             <span>Pengumpulan Tugas</span>
-                        </x-nav-link>
+                        </x-nav-link> --}}
 
                         <!-- Laporan -->
                         <x-nav-link :href="route('admin.laporan.performa')" 
