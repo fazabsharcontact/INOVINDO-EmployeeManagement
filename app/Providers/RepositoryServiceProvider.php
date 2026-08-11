@@ -36,6 +36,10 @@ use App\Repositories\Contracts\TransactionManagerInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\DatabaseTransactionManager;
 use App\Repositories\EloquentUserRepository;
+use App\Repositories\Contracts\PengumumanRepositoryInterface;
+use App\Repositories\Contracts\PengumumanTargetRepositoryInterface;
+use App\Repositories\EloquentPengumumanRepository;
+use App\Repositories\EloquentPengumumanTargetRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -90,6 +94,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PegawaiRepositoryInterface::class,
             EloquentPegawaiRepository::class
+        );
+
+        $this->app->bind(
+            PengumumanRepositoryInterface::class,
+            EloquentPengumumanRepository::class
+        );
+
+        $this->app->bind(
+            PengumumanTargetRepositoryInterface::class,
+            EloquentPengumumanTargetRepository::class
         );
     }
 
