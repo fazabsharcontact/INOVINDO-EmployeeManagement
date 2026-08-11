@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Divisi;
 use App\Repositories\Contracts\DivisiRepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 
 class EloquentDivisiRepository implements DivisiRepositoryInterface
 {
@@ -25,5 +26,10 @@ class EloquentDivisiRepository implements DivisiRepositoryInterface
     public function delete(Divisi $divisi): bool
     {
         return $divisi->delete();
+    }
+
+    public function getAllWithTims(): Collection
+    {
+        return Divisi::with('tims')->get();
     }
 }

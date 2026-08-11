@@ -3,6 +3,7 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Divisi;
+use Illuminate\Database\Eloquent\Collection;
 
 interface DivisiRepositoryInterface
 {
@@ -13,4 +14,6 @@ interface DivisiRepositoryInterface
     public function countTeams(Divisi $divisi): int;
 
     public function delete(Divisi $divisi): bool;
+    
+    public function getAllWithTims(): Collection;
 }

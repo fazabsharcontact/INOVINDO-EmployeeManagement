@@ -32,6 +32,10 @@ use App\Repositories\Contracts\MasterPotonganRepositoryInterface;
 use App\Repositories\EloquentMasterPotonganRepository;
 use App\Repositories\Contracts\MeetingRepositoryInterface;
 use App\Repositories\EloquentMeetingRepository;
+use App\Repositories\Contracts\TransactionManagerInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\DatabaseTransactionManager;
+use App\Repositories\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -49,6 +53,11 @@ class RepositoryServiceProvider extends ServiceProvider
         KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
         JabatanRepositoryInterface::class => EloquentJabatanRepository::class,
         MasterPotonganRepositoryInterface::class => EloquentMasterPotonganRepository::class,
+        PegawaiRepositoryInterface::class => EloquentPegawaiRepository::class,
+        UserRepositoryInterface::class => EloquentUserRepository::class,
+        JabatanRepositoryInterface::class => EloquentJabatanRepository::class,
+        DivisiRepositoryInterface::class => EloquentDivisiRepository::class,
+        TransactionManagerInterface::class => DatabaseTransactionManager::class,
     ];
 
     public function register(): void

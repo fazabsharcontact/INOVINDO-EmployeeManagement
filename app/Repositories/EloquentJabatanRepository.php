@@ -37,4 +37,9 @@ class EloquentJabatanRepository implements JabatanRepositoryInterface
     {
         $jabatan->delete();
     }
+
+    public function getAllOrderedByName(): Collection
+    {
+        return Jabatan::orderBy('nama_jabatan')->get();
+    }
 }

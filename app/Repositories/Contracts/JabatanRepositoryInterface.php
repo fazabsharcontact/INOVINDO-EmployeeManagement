@@ -14,4 +14,6 @@ interface JabatanRepositoryInterface
     public function update(Jabatan $jabatan, array $data): void;
 
     public function delete(Jabatan $jabatan): void;
+
+    public function getAllOrderedByName(): Collection;
 }
