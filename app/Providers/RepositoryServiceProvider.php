@@ -24,6 +24,8 @@ use App\Repositories\EloquentCutiRepository;
 use App\Repositories\EloquentSisaCutiRepository;
 use App\Repositories\Contracts\DashboardRepositoryInterface;
 use App\Repositories\EloquentDashboardRepository;
+use App\Repositories\Contracts\DivisiRepositoryInterface;
+use App\Repositories\EloquentDivisiRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -56,6 +58,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             DashboardRepositoryInterface::class,
             EloquentDashboardRepository::class
+        );
+
+        $this->app->bind(
+            DivisiRepositoryInterface::class,
+            EloquentDivisiRepository::class
         );
     }
 
