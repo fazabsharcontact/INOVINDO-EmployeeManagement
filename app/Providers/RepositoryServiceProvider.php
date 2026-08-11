@@ -12,6 +12,8 @@ use App\Repositories\Contracts\GajiMassalRepositoryInterface;
 use App\Repositories\EloquentGajiMassalRepository;
 use App\Repositories\Contracts\LaporanPerformaRepositoryInterface;
 use App\Repositories\EloquentLaporanPerformaRepository;
+use App\Repositories\Contracts\KehadiranRepositoryInterface;
+use App\Repositories\EloquentKehadiranRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -21,6 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
         PegawaiRepositoryInterface::class => EloquentPegawaiRepository::class,
         GajiReferenceRepositoryInterface::class => EloquentGajiReferenceRepository::class,
         GajiMassalRepositoryInterface::class => EloquentGajiMassalRepository::class,
+        KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
     ];
 
     public function register(): void
