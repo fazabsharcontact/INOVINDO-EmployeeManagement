@@ -16,6 +16,8 @@ use App\Repositories\Contracts\KehadiranRepositoryInterface;
 use App\Repositories\EloquentKehadiranRepository;
 use App\Repositories\Contracts\AdminTugasRepositoryInterface;
 use App\Repositories\EloquentAdminTugasRepository;
+use App\Repositories\Contracts\TugasPengumpulanRepositoryInterface;
+use App\Repositories\EloquentTugasPengumpulanRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         GajiReferenceRepositoryInterface::class => EloquentGajiReferenceRepository::class,
         GajiMassalRepositoryInterface::class => EloquentGajiMassalRepository::class,
         KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
+        AdminTugasRepositoryInterface::class => EloquentAdminTugasRepository::class,
     ];
 
     public function register(): void
@@ -33,6 +36,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             LaporanPerformaRepositoryInterface::class,
             EloquentLaporanPerformaRepository::class
+        );
+
+        $this->app->bind(
+            TugasPengumpulanRepositoryInterface::class,
+            EloquentTugasPengumpulanRepository::class
         );
     }
 
