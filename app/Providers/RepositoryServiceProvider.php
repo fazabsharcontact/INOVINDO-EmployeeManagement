@@ -22,6 +22,8 @@ use App\Repositories\Contracts\CutiRepositoryInterface;
 use App\Repositories\Contracts\SisaCutiRepositoryInterface;
 use App\Repositories\EloquentCutiRepository;
 use App\Repositories\EloquentSisaCutiRepository;
+use App\Repositories\Contracts\DashboardRepositoryInterface;
+use App\Repositories\EloquentDashboardRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -49,6 +51,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             TugasPengumpulanRepositoryInterface::class,
             EloquentTugasPengumpulanRepository::class
+        );
+
+        $this->app->bind(
+            DashboardRepositoryInterface::class,
+            EloquentDashboardRepository::class
         );
     }
 
