@@ -20,4 +20,10 @@ interface KehadiranRepositoryInterface
     public function getByPegawaiAndPeriod($pegawaiId, $tahun, $bulan): Collection;
 
     public function findKehadiranOrFail($id): Kehadiran;
+
+    public function findByPegawaiAndDate(mixed $pegawaiId, string $date): ?Kehadiran;
+
+    public function create(array $attributes): Kehadiran;
+
+    public function update(Kehadiran $kehadiran, array $attributes): bool;
 }

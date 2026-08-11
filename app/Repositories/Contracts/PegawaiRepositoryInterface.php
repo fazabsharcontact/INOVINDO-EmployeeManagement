@@ -4,6 +4,7 @@ namespace App\Repositories\Contracts;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 interface PegawaiRepositoryInterface
 {
@@ -16,4 +17,10 @@ interface PegawaiRepositoryInterface
     ): Collection;
 
     public function findWithRelations(int|string $pegawaiId, array $relations): mixed;
+
+    public function paginateWithCutiSummary(
+        mixed $search,
+        int $perPage = 10,
+        string $pageName = 'pegawai_page'
+    ): LengthAwarePaginator;
 }

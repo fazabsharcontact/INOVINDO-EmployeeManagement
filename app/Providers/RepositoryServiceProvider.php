@@ -18,6 +18,10 @@ use App\Repositories\Contracts\AdminTugasRepositoryInterface;
 use App\Repositories\EloquentAdminTugasRepository;
 use App\Repositories\Contracts\TugasPengumpulanRepositoryInterface;
 use App\Repositories\EloquentTugasPengumpulanRepository;
+use App\Repositories\Contracts\CutiRepositoryInterface;
+use App\Repositories\Contracts\SisaCutiRepositoryInterface;
+use App\Repositories\EloquentCutiRepository;
+use App\Repositories\EloquentSisaCutiRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -29,6 +33,10 @@ class RepositoryServiceProvider extends ServiceProvider
         GajiMassalRepositoryInterface::class => EloquentGajiMassalRepository::class,
         KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
         AdminTugasRepositoryInterface::class => EloquentAdminTugasRepository::class,
+        CutiRepositoryInterface::class => EloquentCutiRepository::class,
+        PegawaiRepositoryInterface::class => EloquentPegawaiRepository::class,
+        SisaCutiRepositoryInterface::class => EloquentSisaCutiRepository::class,
+        KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class
     ];
 
     public function register(): void

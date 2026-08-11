@@ -6,6 +6,7 @@ use App\Models\Pegawai;
 use App\Repositories\Contracts\PegawaiRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class EloquentPegawaiRepository implements PegawaiRepositoryInterface
 {
@@ -32,5 +33,19 @@ class EloquentPegawaiRepository implements PegawaiRepositoryInterface
     public function findWithRelations(int|string $pegawaiId, array $relations): mixed
     {
         return Pegawai::with($relations)->find($pegawaiId);
+    }
+
+    public function paginateWithCutiSummary(
+        mixed $search,
+        int $perPage = 10,
+        string $pageName = 'pegawai_page'
+    ): LengthAwarePaginator {
+        return Pegawai::with(['jabatan', 'sisaCuti'])
+            ->when(
+                $search,
+                fn ($builder) => $builder->where('nama', 'like', "%{$search}%")
+            )
+            ->orderBy('nama')
+            ->paginate($perPage, ['*'], $pageName);
     }
 }
