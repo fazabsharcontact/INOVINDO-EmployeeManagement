@@ -30,6 +30,8 @@ use App\Repositories\Contracts\JabatanRepositoryInterface;
 use App\Repositories\EloquentJabatanRepository;
 use App\Repositories\Contracts\MasterPotonganRepositoryInterface;
 use App\Repositories\EloquentMasterPotonganRepository;
+use App\Repositories\Contracts\MeetingRepositoryInterface;
+use App\Repositories\EloquentMeetingRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -69,6 +71,16 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             DivisiRepositoryInterface::class,
             EloquentDivisiRepository::class
+        );
+
+        $this->app->bind(
+            MeetingRepositoryInterface::class,
+            EloquentMeetingRepository::class
+        );
+
+        $this->app->bind(
+            PegawaiRepositoryInterface::class,
+            EloquentPegawaiRepository::class
         );
     }
 

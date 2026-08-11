@@ -3,124 +3,71 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Meeting\StoreMeetingRequest;
+use App\Http\Requests\Admin\Meeting\UpdateMeetingRequest;
 use App\Models\Meeting;
-use App\Models\Pegawai;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Services\MeetingService;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class MeetingController extends Controller
 {
-    /**
-<<<<<<< HEAD
-=======
-     * Menampilkan daftar semua meeting.
->>>>>>> origin/backend-pegawai
-     */
-    public function index()
+    public function __construct(
+        private readonly MeetingService $meetingService,
+    ) {
+    }
+
+    public function index(): View
     {
-        $meetings = Meeting::with('pembuat')->withCount('pesertas')->latest()->paginate(10);
+        $meetings = $this->meetingService->getPaginatedMeetings();
+
         return view('admin.meeting.index', compact('meetings'));
     }
 
-    /**
-<<<<<<< HEAD
-=======
-     * Menampilkan form untuk membuat meeting baru.
->>>>>>> origin/backend-pegawai
-     */
-    public function create()
+    public function create(): View
     {
-        $pegawais = Pegawai::orderBy('nama')->get();
+        $pegawais = $this->meetingService->getPegawais();
+
         return view('admin.meeting.create', compact('pegawais'));
     }
 
-    /**
-<<<<<<< HEAD
-=======
-     * Menyimpan meeting baru ke database.
->>>>>>> origin/backend-pegawai
-     */
-    public function store(Request $request)
+    public function store(StoreMeetingRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'waktu_mulai' => 'required|date',
-            'waktu_selesai' => 'required|date|after_or_equal:waktu_mulai',
-            'lokasi' => 'required|string|max:255',
-            'pembuat_id' => 'required|exists:pegawais,id',
-            'peserta_ids' => 'required|array',
-            'peserta_ids.*' => 'exists:pegawais,id',
-        ]);
-        
-        DB::transaction(function () use ($validated) {
-            $meetingData = [
-                'judul' => $validated['judul'],
-                'deskripsi' => $validated['deskripsi'],
-                'waktu_mulai' => $validated['waktu_mulai'],
-                'waktu_selesai' => $validated['waktu_selesai'],
-                'lokasi' => $validated['lokasi'],
-                'pembuat_id' => $validated['pembuat_id'],
-            ];
-
-            $meeting = Meeting::create($meetingData);
-            $meeting->pesertas()->sync($validated['peserta_ids']);
-        });
+        $this->meetingService->createMeeting($request->validated());
 
         return redirect()->route('admin.meeting.index')
             ->with('success', 'Meeting baru berhasil dijadwalkan.');
     }
 
-    /**
-     */
-    public function edit(Meeting $meeting)
+    public function edit(Meeting $meeting): View
     {
-        $pegawais = Pegawai::orderBy('nama')->get();
-        $pesertaIds = $meeting->pesertas->pluck('id')->toArray();
+        $pegawais = $this->meetingService->getPegawais();
+        $pesertaIds = $this->meetingService->getParticipantIds($meeting);
 
-        return view('admin.meeting.edit', compact('meeting', 'pegawais', 'pesertaIds'));
+        return view(
+            'admin.meeting.edit',
+            compact('meeting', 'pegawais', 'pesertaIds')
+        );
     }
 
-    /**
-     */
-    public function update(Request $request, Meeting $meeting)
-    {
-        $validated = $request->validate([
-            'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'waktu_mulai' => 'required|date',
-            'waktu_selesai' => 'required|date|after_or_equal:waktu_mulai',
-            'lokasi' => 'required|string|max:255',
-            'pembuat_id' => 'required|exists:pegawais,id',
-            'peserta_ids' => 'required|array',
-            'peserta_ids.*' => 'exists:pegawais,id',
-        ]);
-
-        DB::transaction(function () use ($validated, $meeting) {
-            $meetingData = [
-                'judul' => $validated['judul'],
-                'deskripsi' => $validated['deskripsi'],
-                'waktu_mulai' => $validated['waktu_mulai'],
-                'waktu_selesai' => $validated['waktu_selesai'],
-                'lokasi' => $validated['lokasi'],
-                'pembuat_id' => $validated['pembuat_id'],
-            ];
-            
-            $meeting->update($meetingData);
-            $meeting->pesertas()->sync($validated['peserta_ids']);
-        });
+    public function update(
+        UpdateMeetingRequest $request,
+        Meeting $meeting
+    ): RedirectResponse {
+        $this->meetingService->updateMeeting(
+            $meeting,
+            $request->validated()
+        );
 
         return redirect()->route('admin.meeting.index')
             ->with('success', 'Data meeting berhasil diperbarui.');
     }
 
-    /**
-     */
-    public function destroy(Meeting $meeting)
+    public function destroy(Meeting $meeting): RedirectResponse
     {
-        $meeting->delete();
+        $this->meetingService->deleteMeeting($meeting);
+
         return redirect()->route('admin.meeting.index')
             ->with('success', 'Meeting berhasil dihapus.');
     }
 }
-
