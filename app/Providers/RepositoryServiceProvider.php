@@ -28,6 +28,8 @@ use App\Repositories\Contracts\DivisiRepositoryInterface;
 use App\Repositories\EloquentDivisiRepository;
 use App\Repositories\Contracts\JabatanRepositoryInterface;
 use App\Repositories\EloquentJabatanRepository;
+use App\Repositories\Contracts\MasterPotonganRepositoryInterface;
+use App\Repositories\EloquentMasterPotonganRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -44,6 +46,7 @@ class RepositoryServiceProvider extends ServiceProvider
         SisaCutiRepositoryInterface::class => EloquentSisaCutiRepository::class,
         KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
         JabatanRepositoryInterface::class => EloquentJabatanRepository::class,
+        MasterPotonganRepositoryInterface::class => EloquentMasterPotonganRepository::class,
     ];
 
     public function register(): void

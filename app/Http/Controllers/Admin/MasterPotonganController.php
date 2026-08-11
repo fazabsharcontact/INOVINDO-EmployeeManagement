@@ -3,76 +3,64 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreMasterPotonganRequest;
+use App\Http\Requests\Admin\UpdateMasterPotonganRequest;
 use App\Models\MasterPotongan;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Services\MasterPotonganService;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class MasterPotonganController extends Controller
 {
-    public function index()
+    public function __construct(
+        private readonly MasterPotonganService $masterPotonganService
+    ) {
+    }
+
+    public function index(): RedirectResponse
     {
         return redirect()->route('admin.tunjangan-potongan.index');
     }
 
-    public function create()
+    public function create(): View
     {
-        // Mengarahkan ke view untuk membuat potongan baru
         return view('admin.tunjangan.master-potongan.create');
     }
 
-    /**
-     * Menyimpan potongan baru ke database.
-     */
-    public function store(Request $request)
+    public function store(StoreMasterPotonganRequest $request): RedirectResponse
     {
-        // PERBAIKAN: Tambahkan validasi untuk 'jumlah_default'
-        $validated = $request->validate([
-            'nama_potongan' => 'required|string|max:100|unique:master_potongans,nama_potongan',
-            'jumlah_default' => 'nullable|numeric|min:0', // Memastikan nilainya angka & tidak negatif
-            'deskripsi' => 'nullable|string',
-        ]);
-
-        MasterPotongan::create($validated);
+        $this->masterPotonganService->create($request->validated());
 
         return redirect()->route('admin.tunjangan-potongan.index')
             ->with('success', 'Jenis potongan berhasil ditambahkan.');
     }
 
-    /**
-     * Menampilkan form untuk mengedit potongan.
-     */
-    public function edit(MasterPotongan $masterPotongan)
+    public function edit(MasterPotongan $masterPotongan): View
     {
-        // Mengarahkan ke view untuk mengedit potongan
-        return view('admin.tunjangan.master-potongan.edit', compact('masterPotongan'));
+        return view(
+            'admin.tunjangan.master-potongan.edit',
+            compact('masterPotongan')
+        );
     }
 
-    /**
-     * Memperbarui data potongan di database.
-     */
-    public function update(Request $request, MasterPotongan $masterPotongan)
-    {
-        // PERBAIKAN: Tambahkan validasi untuk 'jumlah_default'
-        $validated = $request->validate([
-            'nama_potongan' => ['required', 'string', 'max:100', Rule::unique('master_potongans')->ignore($masterPotongan->id)],
-            'jumlah_default' => 'nullable|numeric|min:0',
-            'deskripsi' => 'nullable|string',
-        ]);
-
-        $masterPotongan->update($validated);
+    public function update(
+        UpdateMasterPotonganRequest $request,
+        MasterPotongan $masterPotongan
+    ): RedirectResponse {
+        $this->masterPotonganService->update(
+            $masterPotongan,
+            $request->validated()
+        );
 
         return redirect()->route('admin.tunjangan-potongan.index')
             ->with('success', 'Jenis potongan berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus data potongan dari database.
-     */
-    public function destroy(MasterPotongan $masterPotongan)
+    public function destroy(MasterPotongan $masterPotongan): RedirectResponse
     {
-        $masterPotongan->delete();
+        $this->masterPotonganService->delete($masterPotongan);
+
         return redirect()->route('admin.tunjangan-potongan.index')
             ->with('success', 'Jenis potongan berhasil dihapus.');
     }
 }
-
