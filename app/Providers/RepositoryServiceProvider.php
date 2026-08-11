@@ -14,6 +14,8 @@ use App\Repositories\Contracts\LaporanPerformaRepositoryInterface;
 use App\Repositories\EloquentLaporanPerformaRepository;
 use App\Repositories\Contracts\KehadiranRepositoryInterface;
 use App\Repositories\EloquentKehadiranRepository;
+use App\Repositories\Contracts\AdminTugasRepositoryInterface;
+use App\Repositories\EloquentAdminTugasRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
