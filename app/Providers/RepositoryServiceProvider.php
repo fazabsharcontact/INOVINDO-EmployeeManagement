@@ -26,6 +26,8 @@ use App\Repositories\Contracts\DashboardRepositoryInterface;
 use App\Repositories\EloquentDashboardRepository;
 use App\Repositories\Contracts\DivisiRepositoryInterface;
 use App\Repositories\EloquentDivisiRepository;
+use App\Repositories\Contracts\JabatanRepositoryInterface;
+use App\Repositories\EloquentJabatanRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -40,7 +42,8 @@ class RepositoryServiceProvider extends ServiceProvider
         CutiRepositoryInterface::class => EloquentCutiRepository::class,
         PegawaiRepositoryInterface::class => EloquentPegawaiRepository::class,
         SisaCutiRepositoryInterface::class => EloquentSisaCutiRepository::class,
-        KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class
+        KehadiranRepositoryInterface::class => EloquentKehadiranRepository::class,
+        JabatanRepositoryInterface::class => EloquentJabatanRepository::class,
     ];
 
     public function register(): void
